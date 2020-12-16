@@ -1,0 +1,65 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: dbot - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1D1.tmp" with contents
+[
+/nologo /ML /W3 /GX /O1 /I "C:\Program Files\Microsoft SDK\Include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"obj/dbot.pch" /YX /Fo"obj/" /Fd"obj/" /FD /c 
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\botkiller.cpp"
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\d3des.c"
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\downloader.cpp"
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\ftpd.cpp"
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\main.cpp"
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\misc.cpp"
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\patcher.cpp"
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\qvncpass.cpp"
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\scanner.cpp"
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\vncps.cpp"
+"C:\Documents and Settings\Administrator\Desktop\dbot\dbot\netapi.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1D1.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1D2.tmp" with contents
+[
+ws2_32.lib Shell32.lib advapi32.lib wininet.lib kernel32.lib User32.lib /nologo /subsystem:windows /incremental:no /pdb:"exe/dbot.pdb" /machine:I386 /out:"exe/dbot.exe" /opt:nowin98 
+".\obj\botkiller.obj"
+".\obj\d3des.obj"
+".\obj\downloader.obj"
+".\obj\ftpd.obj"
+".\obj\main.obj"
+".\obj\md5.obj"
+".\obj\misc.obj"
+".\obj\patcher.obj"
+".\obj\qvncpass.obj"
+".\obj\scanner.obj"
+".\obj\version.obj"
+".\obj\vncps.obj"
+".\obj\res.res"
+".\obj\netapi.obj"
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1D2.tmp"
+<h3>Output Window</h3>
+Compiling...
+botkiller.cpp
+d3des.c
+downloader.cpp
+ftpd.cpp
+main.cpp
+misc.cpp
+patcher.cpp
+qvncpass.cpp
+scanner.cpp
+vncps.cpp
+netapi.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+dbot.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

